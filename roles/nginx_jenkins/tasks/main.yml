@@ -54,9 +54,19 @@
     state: directory
     mode: '0755'
 
-- name: Copy Nginx configuration file
-  template:
-    src: nginx.conf.j2
+- name: Copy Nginx configuration template
+  copy:
+    content: |
+      server {
+        listen {{ nginx_port }};
+        server_name {{ jenkins_hostname }};
+        location / {
+          proxy_pass http://{{ jenkins_ip }}:{{ jenkins_port }};
+          proxy_set_header Host $host;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        }
+      }
     dest: /etc/nginx/conf.d/jenkins.conf
     mode: '0644'
   notify: Reload Nginx
