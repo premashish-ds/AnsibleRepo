@@ -48,25 +48,17 @@
     state: present
   when: ansible_distribution == "CentOS"
 
-- name: Configure Jenkins on Ubuntu
-  lineinfile:
-    path: /etc/default/jenkins
-    regexp: 'HTTP_PORT='
-    line: 'HTTP_PORT="{{ jenkins_port }}"'
-#  notify: restart jenkins
-  when: ansible_distribution == "Ubuntu"
-  
-- name: Create nginx.conf.j2 template file on Ubuntu
-  become: true
+- name: Create Nginx configuration file
   template:
-    src: templates/nginx.conf.j2
-    dest: /etc/nginx/sites-available/jenkins
-    remote_src: yes
-  when: ansible_distribution == "Ubuntu"
+    src: templates/jenkins.conf.j2
+    dest: "{{ nginx_conf_path }}"
+  notify:
+    - Reload Nginx
 
-- name: Enable Jenkins site in Nginx on Ubuntu
+- name: Enable Nginx site
   file:
-    src: /etc/nginx/sites-available/jenkins
-    dest: /etc/nginx/sites-enabled/jenkins
+    src: "{{ nginx_conf_path }}"
+    dest: /etc/nginx/sites-enabled/jenkins.conf
     state: link
-  when: ansible_distribution == "Ubuntu"
+  notify:
+    - Reload Nginx
