@@ -79,6 +79,4 @@
   loop:
     - nginx
     - jenkins    
-    
-- name: Reboot the system
-  command: init 6
+
