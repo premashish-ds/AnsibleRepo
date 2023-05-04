@@ -76,7 +76,6 @@
     name: "{{ item }}"
     reboot_timeout: 3600
     post_reboot_delay: 30
-    msg: "Rebooting {{ item }} service started..."
   loop:
     - nginx
     - jenkins
