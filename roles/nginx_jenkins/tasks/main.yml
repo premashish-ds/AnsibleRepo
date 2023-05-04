@@ -78,9 +78,4 @@
     post_reboot_delay: 30
   loop:
     - nginx
-    - jenkins
-  register: nginx_result
-    
-- name: Check Nginx status
-  debug:
-    msg: "Nginx service is {{ nginx_result.status }}"    
+    - jenkins   
