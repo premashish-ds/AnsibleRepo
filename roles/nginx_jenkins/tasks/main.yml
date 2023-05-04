@@ -75,4 +75,6 @@
   reboot:
     post_reboot_delay: 30
   when: ansible_reboot_pending    
-    
+  loop:
+    - nginx.service
+    - jenkins.service    
