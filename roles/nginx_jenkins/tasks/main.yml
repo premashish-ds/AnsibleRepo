@@ -73,5 +73,5 @@
 
 - name: Reboot the services
   reboot:
-    post_reboot_delay: 30
+    reboot_timeout: 3600
     msg: "Reboot initiated..."
