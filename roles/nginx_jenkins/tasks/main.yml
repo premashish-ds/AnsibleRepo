@@ -62,15 +62,6 @@
     dest: /etc/nginx/conf.d/jenkins.conf
     mode: '0644'
     
-- name: Stop and disable Nginx and Jenkins services
-  service:
-    name: "{{ item }}"
-    state: stopped
-    enabled: no
-  loop:
-    - nginx
-    - jenkins
-
 - name: Reboot the services
   reboot:
     reboot_timeout: 3600
