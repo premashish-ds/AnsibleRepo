@@ -1,47 +1,47 @@
-- name: Install Nginx on {{ ansible_distribution }}
+- name: Install Nginx on Ubuntu
   become: true
   apt:
     name: nginx
     state: present
   when: ansible_distribution == "Ubuntu"
 
-- name: Install Nginx on {{ ansible_distribution }}
+- name: Install Nginx on CentOS
   become: true
   yum:
     name: nginx
     state: present
   when: ansible_distribution == "CentOS"
 
-- name: Install Jenkins keyring on {{ ansible_distribution }}
+- name: Install Jenkins keyring on Ubuntu
   become: true
   shell: curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee /usr/share/keyrings/jenkins-keyring.asc > /dev/null
   when: ansible_distribution == "Ubuntu"
 
-- name: Install Jenkins repository on {{ ansible_distribution }}
+- name: Install Jenkins repository on Ubuntu
   become: true
   shell: echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
   when: ansible_distribution == "Ubuntu"
 
-- name: Install openjdk-11-jdk on {{ ansible_distribution }}
+- name: Install openjdk-11-jdk on Ubuntu
   become: true
   apt:
     name: openjdk-11-jdk
     state: present
   when: ansible_distribution == "Ubuntu"
 
-- name: Update package cache on {{ ansible_distribution }}
+- name: Update package cache on Ubuntu
   become: true
   apt:
     update_cache: yes
 
-- name: Install Jenkins on {{ ansible_distribution }}
+- name: Install Jenkins on Ubuntu
   become: true
   apt:
     name: jenkins
     state: present
   when: ansible_distribution == "Ubuntu"
 
-- name: Install Jenkins on {{ ansible_distribution }}
+- name: Install Jenkins on CentOS
   become: true
   yum:
     name: jenkins
