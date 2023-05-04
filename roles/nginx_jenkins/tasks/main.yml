@@ -60,8 +60,8 @@
   template:
     src: nginx.conf.j2
     dest: /etc/nginx/sites-available/jenkins
-    remote_src: true
-#  notify: restart nginx
+    remote_src: yes
+  notify: restart nginx
   when: ansible_distribution == "Ubuntu"
 
 - name: Enable Jenkins site in Nginx on Ubuntu
