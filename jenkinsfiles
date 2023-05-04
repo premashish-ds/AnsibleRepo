@@ -3,15 +3,6 @@ pipeline {
         label 'masternodes'
     }
     stages {
-        stage('Checkout') {
-            steps {
-                checkout scmGit(
-                    branches: [[name: '*/main']],
-                    extensions: [],
-                    userRemoteConfigs: [[url: 'https://github.com/premashish-ds/AnsibleRepo.git']]
-                )
-            }
-        }
         stage('Ansible Playbook Execution') {
             steps {
                 sh 'ansible-playbook $WORKSPACE/jenkins_nginx_install.yml'
