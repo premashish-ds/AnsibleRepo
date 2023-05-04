@@ -85,7 +85,7 @@
     name: "{{ item }}"
     enabled: true
     reboot_timeout: 3600
-    msg: "Status: Reboot complete for "{{ item }}""
+    msg: "Status: Reboot complete for "{{ item }}"
   loop:
     - nginx
     - jenkins    
