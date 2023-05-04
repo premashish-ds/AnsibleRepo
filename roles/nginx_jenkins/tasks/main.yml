@@ -48,17 +48,15 @@
     state: present
   when: ansible_distribution == "CentOS"
 
-- name: Create Nginx configuration file
-  template:
-    src: templates/jenkins.conf.j2
-    dest: "{{ nginx_conf_path }}"
-  notify:
-    - Reload Nginx
-
-- name: Enable Nginx site
+- name: Create Nginx configuration directory
   file:
-    src: "{{ nginx_conf_path }}"
-    dest: /etc/nginx/sites-enabled/jenkins.conf
-    state: link
-  notify:
-    - Reload Nginx
+    path: /etc/nginx/conf.d
+    state: directory
+    mode: '0755'
+
+- name: Copy Nginx configuration file
+  template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/conf.d/jenkins.conf
+    mode: '0644'
+  notify: Reload Nginx
