@@ -1,4 +1,4 @@
 ---
-nginx_conf_path: /etc/nginx/sites-available/jenkins.conf
-jenkins_listen_address: 192.168.0.104
-jenkins_listen_port: 8080
+nginx_port: 80
+jenkins_port: 8080
+jenkins_hostname: jenkins.example.com
