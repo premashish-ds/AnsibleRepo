@@ -69,23 +69,19 @@
     state: stopped
   loop:
     - nginx
-    - jenkins
-
-- name: Reboot Nginx and Jenkins services
-  service:
-    name: "{{ item }}"
-    enabled: true
-    state: restarted
-  loop:
-    - nginx
-    - jenkins  
+    - jenkins 
     
 - name: Reboot services
   reboot:
     name: "{{ item }}"
-    enabled: true
     reboot_timeout: 3600
-    msg: "Status: Reboot complete for {{ item }}"
+    post_reboot_delay: 30
+    msg: "Rebooting {{ item }} service started..."
   loop:
     - nginx
-    - jenkins   
+    - jenkins
+  register: nginx_result
+    
+- name: Check Nginx status
+  debug:
+    msg: "Nginx service is {{ nginx_result.status }}"    
