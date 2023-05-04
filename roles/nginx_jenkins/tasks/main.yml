@@ -55,6 +55,13 @@
     line: 'HTTP_PORT="{{ jenkins_port }}"'
 #  notify: restart jenkins
   when: ansible_distribution == "Ubuntu"
+  
+- name: Create nginx.conf.j2 template file on Ubuntu
+  become: true
+  template:
+    src: templates/nginx.conf.j2
+    dest: /etc/nginx/sites-available/jenkins
+  when: ansible_distribution == "Ubuntu"
 
 - name: Configure Nginx on Ubuntu
   template:
