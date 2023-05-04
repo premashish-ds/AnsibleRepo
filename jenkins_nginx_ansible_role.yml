@@ -1,0 +1,5 @@
+- name: Install Nginx and Jenkins
+  hosts: nodes
+  become: true
+  roles:
+    - nginx_jenkins
