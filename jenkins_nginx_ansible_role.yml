@@ -2,4 +2,4 @@
   hosts: nodes
   become: true
   roles:
-    - nginx-jenkins
+    - nginx_jenkins
