@@ -1,17 +1,4 @@
-- name: Stop Nginx and Jenkins services
+- name: Restart Nginx
   service:
-    name: "{{ item }}"
-    enabled: true
-    state: stopped
-  loop:
-    - nginx
-    - jenkins
-
-- name: Enable Nginx and Jenkins services
-  service:
-    name: "{{ item }}"
-    enabled: true
-    state: started
-  loop:
-    - nginx
-    - jenkins
+    name: nginx
+    state: restarted
