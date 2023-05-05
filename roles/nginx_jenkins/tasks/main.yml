@@ -61,21 +61,18 @@
       }
     dest: /etc/nginx/conf.d/jenkins.conf
     mode: '0644'
-    
-- name: Stop Nginx and Jenkins services
-  service:
-    name: "{{ item }}"
-    enabled: true
-    state: stopped
-  loop:
-    - nginx
-    - jenkins
-
+   
+- name: Enable Nginx configuration
+  file:
+    src: /etc/nginx/sites-available/jenkins
+    dest: /etc/nginx/sites-enabled/jenkins
+    state: link   
+   
 - name: Enable Nginx and Jenkins services
   service:
     name: "{{ item }}"
     enabled: true
-    state: restarted
+    state: reloaded
   loop:
     - nginx
     - jenkins    
