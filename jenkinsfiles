@@ -14,7 +14,7 @@ pipeline {
         }      
         stage('Ansible Playbook Execution') {
             steps {
-                sh 'ansible-playbook $WORKSPACE/jenkins_nginx_install.yml'
+                sh 'ansible-playbook -i inventory $WORKSPACE/jenkins_nginx_install.yml'
             }
         }
     }
