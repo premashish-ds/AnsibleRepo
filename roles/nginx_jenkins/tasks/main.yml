@@ -73,6 +73,3 @@
     dest: /etc/nginx/conf.d/jenkins.conf
     mode: '0644'
     
-- name: Reboot the system
-  become: true
-  command: init 6
