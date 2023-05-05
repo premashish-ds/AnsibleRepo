@@ -1,5 +1,5 @@
 ---
 nginx_port: 80
 jenkins_port: 8080
-jenkins_ip: 192.168.0.104
+jenkins_ip: 192.168.0.103
 jenkins_hostname:  jenkins.example.com
