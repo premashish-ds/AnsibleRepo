@@ -75,6 +75,19 @@
     
 - name: Reboot the system
   become: true
-  command: init 6
-  reboot: reboot_timeout: 3600
+  command: sudo init 6
+  async: 0
+  poll: 0
+  ignore_errors: true
+  changed_when: false
+  register: reboot_result
+
+- name: Wait for the system to reboot
+  local_action: wait_for
+                host={{ inventory_hostname }}
+                port=22
+                state=stopped
+                delay=30
+                timeout=3600
+  when: reboot_result is not failed
     
