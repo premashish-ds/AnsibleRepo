@@ -33,6 +33,7 @@
     name: jenkins
     state: present
   when: ansible_distribution == "Ubuntu"
+  notify: Restart Nginx
 
 - name: Install Jenkins on CentOS
   yum:
@@ -62,18 +63,12 @@
       }
     dest: /etc/nginx/conf.d/jenkins.conf
     mode: '0644'
-   
-- name: Enable Nginx configuration
-  file:
-    src: /etc/nginx/sites-available/jenkins
-    dest: /etc/nginx/sites-enabled/jenkins
-    state: link   
-   
+    
 - name: Enable Nginx and Jenkins services
   service:
     name: "{{ item }}"
     enabled: true
-    state: reloaded
+    state: started
   loop:
     - nginx
     - jenkins    
