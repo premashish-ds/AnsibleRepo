@@ -1,5 +1,5 @@
 [source]
-source_instance ansible_host=node1@192.168.0.104
+source_instance ansible_host=node1@192.168.0.103
 
 [destination]
-destination_instance ansible_host=node2@192.168.0.105
+destination_instance ansible_host=node2@192.168.0.104
