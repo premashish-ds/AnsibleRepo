@@ -40,6 +40,15 @@
     name: jenkins
     state: present
   when: ansible_distribution == "CentOS"
+  
+- name: Enable Nginx and Jenkins services
+  service:
+    name: "{{ item }}"
+    enabled: true
+    state: started
+  loop:
+    - nginx
+    - jenkins      
 
 - name: Create Nginx configuration directory
   file:
@@ -64,12 +73,6 @@
     dest: /etc/nginx/conf.d/jenkins.conf
     mode: '0644'
     
-- name: Enable Nginx and Jenkins services
-  service:
-    name: "{{ item }}"
-    enabled: true
-    state: started
-  loop:
-    - nginx
-    - jenkins    
-
+- name: Reboot the system
+  become: true
+  command: init 6
